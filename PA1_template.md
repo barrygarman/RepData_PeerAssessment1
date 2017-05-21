@@ -1,6 +1,6 @@
 # RepData_PeerAssessment-project 1
 Barry Garman  
-May 7, 2017  
+May 20, 2017  
 
 
 
@@ -60,7 +60,7 @@ ggplot(data=averages, aes(x=interval, y=steps)) +
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
-R Code chunk to get the average across all the days in the dataset. 
+## R Code chunk to get the average across all the days in the dataset. 
 
 ```r
 averages[which.max(averages$steps),]
@@ -105,7 +105,7 @@ fill.value <- function(steps, interval) {
 filled.data <- data
 filled.data$steps <- mapply(fill.value, filled.data$steps, filled.data$interval)
 ```
-Code chunbk to plot a histogram of the total number of steps taken each day and calculate the mean and median total number of steps.
+## R Code chunbk to plot a histogram of the total number of steps taken each day and calculate the mean and median total number of steps.
 
 
 ```r
@@ -131,7 +131,7 @@ median(total.steps)
 ## [1] 10766.19
 ```
 
-Mean and median values are higher after imputing missing data. 
+## Mean and median values are higher after imputing missing data. 
 
 ## R Code chunk to get the differences in activity patterns between weekdays and weekends.
 
@@ -150,7 +150,7 @@ filled.data$date <- as.Date(filled.data$date)
 filled.data$day <- sapply(filled.data$date, FUN=weekday.or.weekend)
 ```
 
-R code chunk to plot average number of steps taken on weekdays and weekends.
+## R code chunk to plot average number of steps taken on weekdays and weekends.
 
 ```r
 averages <- aggregate(steps ~ interval + day, data=filled.data, mean)
