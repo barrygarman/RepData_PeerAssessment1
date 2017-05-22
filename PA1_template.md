@@ -25,7 +25,8 @@ library(ggplot2)
 
 ```r
 total_steps <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
-qplot(total_steps, binwidth=1000, xlab="total number of steps taken each day")
+hist(total_steps, main = "Histogram of Total Steps", 
+     xlab = "Total steps in a day", plot=TRUE)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
