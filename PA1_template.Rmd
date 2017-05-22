@@ -22,12 +22,13 @@ data <- read.csv("activity.csv")
 ## R Code chunk to get the mean total number of steps taken per day.
 ```{r}
 library(ggplot2)
-total.steps <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
-qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
-dev.copy(png, "Total_Steps.png", width = 480, height = 480)
-dev.off()
-mean(total.steps, na.rm=TRUE)
-median(total.steps, na.rm=TRUE)
+total_steps <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
+hist(total_steps, main = "Histogram of Total Steps", 
+     xlab = "Total steps in a day", plot=TRUE)
+#dev.copy(png, "Total_Steps.png", width = 480, height = 480)
+#dev.off()
+mean(total_steps, na.rm=TRUE)
+median(total_steps, na.rm=TRUE)
 ```
 
 ## R Code chunk to get the average daily activity pattern.
@@ -39,8 +40,8 @@ ggplot(data=averages, aes(x=interval, y=steps)) +
     geom_line() +
     xlab("5-minute interval") +
     ylab("average number of steps taken")
-dev.copy(png, "Average_Daily_Activity_Pattern.png", width = 480, height = 480)
-dev.off()
+#dev.copy(png, "Average_Daily_Activity_Pattern.png", width = 480, height = 480)
+#dev.off()
 ```
 
 ## R Code chunk to get the average across all the days in the dataset. 
@@ -77,12 +78,12 @@ filled.data$steps <- mapply(fill.value, filled.data$steps, filled.data$interval)
 ## R Code chunbk to plot a histogram of the total number of steps taken each day and calculate the mean and median total number of steps.
 
 ```{r}
-total.steps <- tapply(filled.data$steps, filled.data$date, FUN=sum)
-qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
-dev.copy(png, "Total_Steps_Daily.png", width = 480, height = 480)
-dev.off()
-mean(total.steps)
-median(total.steps)
+total_steps <- tapply(filled.data$steps, filled.data$date, FUN=sum)
+qplot(total_steps, binwidth=1000, xlab="total number of steps taken each day")
+#dev.copy(png, "Total_Steps_Daily.png", width = 480, height = 480)
+#dev.off()
+mean(total_steps)
+median(total_steps)
 ```
 
 ## Mean and median values are higher after imputing missing data. 
@@ -108,6 +109,6 @@ filled.data$day <- sapply(filled.data$date, FUN=weekday.or.weekend)
 averages <- aggregate(steps ~ interval + day, data=filled.data, mean)
 ggplot(averages, aes(interval, steps)) + geom_line() + facet_grid(day ~ .) +
     xlab("5-minute interval") + ylab("Number of steps")
-dev.copy(png, "Average_Number_Of_Steps.png", width = 480, height = 480)
-dev.off()
+#dev.copy(png, "Average_Number_Of_Steps.png", width = 480, height = 480)
+#dev.off()
 ```
