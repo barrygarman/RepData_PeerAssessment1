@@ -26,9 +26,9 @@ library(ggplot2)
 ```r
 total.steps <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
 qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
+dev.copy(png, "Total_Steps.png", width = 480, height = 480)
+dev.off()
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
 
 ```r
 mean(total.steps, na.rm=TRUE)
@@ -56,9 +56,9 @@ ggplot(data=averages, aes(x=interval, y=steps)) +
     geom_line() +
     xlab("5-minute interval") +
     ylab("average number of steps taken")
+    dev.copy(png, "Average_Daily_Activity_Pattern.png", width = 480, height = 480)
+dev.off()
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ## R Code chunk to get the average across all the days in the dataset. 
 
@@ -111,9 +111,9 @@ filled.data$steps <- mapply(fill.value, filled.data$steps, filled.data$interval)
 ```r
 total.steps <- tapply(filled.data$steps, filled.data$date, FUN=sum)
 qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
+dev.copy(png, "Total_Steps_Daily.png", width = 480, height = 480)
+dev.off()
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
 mean(total.steps)
@@ -156,6 +156,6 @@ filled.data$day <- sapply(filled.data$date, FUN=weekday.or.weekend)
 averages <- aggregate(steps ~ interval + day, data=filled.data, mean)
 ggplot(averages, aes(interval, steps)) + geom_line() + facet_grid(day ~ .) +
     xlab("5-minute interval") + ylab("Number of steps")
+    dev.copy(png, "Average_Number_Of_Steps.png", width = 480, height = 480)
+dev.off()
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
